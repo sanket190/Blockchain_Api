@@ -268,6 +268,32 @@ app.get('/block-explorer', function(req, res) {
 
 
 
+//insert api which will add the device_id, current_Capacity,timestamp
+app.post('/insert',function(req,res){
+	const Device_id = req.body.device_id;
+	const Current_Capacity = req.body.current_capacity;
+	const Timestamp  = req.body.timestamp;
+	const Device_id_NotAlreadyPresent = bitcoin.device_Id_array.indexOf(Device_id) == -1;
+	
+	if (Device_id_NotAlreadyPresent) {
+		bitcoin.device_Id_array.push(Device_id);
+		bitcoin.node_device_Id = Device_id;
+		bitcoin.current_capcity = Current_Capacity;
+		bitcoin.timestamp=Timestamp;
+	}
+	res.json({ note: 'node get its device_i, current_Capacity and timestamp' });
+
+});
+
+app.get('/get',function(req,res){
+	const info = bitcoin.getInfo();
+	res.json({
+		Info: info
+	});
+
+});
+
+
 
 app.listen(port, function() {
 	console.log(`Listening on port ${port}...`);

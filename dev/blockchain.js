@@ -8,6 +8,10 @@ function Blockchain() {
 
 	this.currentNodeUrl = currentNodeUrl;
 	this.networkNodes = [];
+	this.node_device_Id = 0;
+	this.device_Id_array = [];
+	this.timestamp =0
+	this.current_capcity =0;
 
 	this.createNewBlock(100, '0', '0'); //genensis block
 };
@@ -148,7 +152,15 @@ Blockchain.prototype.getAddressData = function(address) {
 };
 
 
+Blockchain.prototype.getInfo = function(){
+	info = {
+		Device_id  : this.node_device_Id,
+		// Current_capcity : this.current_capcity,
+		Timeswindow :  this.timestamp
+	};
+	return info;
 
+}
 
 
 
